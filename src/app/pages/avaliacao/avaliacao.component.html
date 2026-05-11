@@ -1,0 +1,39 @@
+<section class="page narrow-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Participacao</p>
+      <h1>Avaliar servico</h1>
+      <p class="lead">Sua avaliacao ajuda a melhorar a qualidade do atendimento publico.</p>
+    </div>
+  </div>
+
+  <form class="surface form-grid" (ngSubmit)="enviar()">
+    <div class="empty-state form-field full" *ngIf="erro">{{ erro }}</div>
+    <div class="success-message form-field full" *ngIf="mensagem">{{ mensagem }}</div>
+
+    <label class="form-field full">
+      Servico
+      <select name="servicoId" [(ngModel)]="servicoId" required>
+        <option value="">Selecione</option>
+        <option *ngFor="let servico of servicos" [value]="servico.id">{{ servico.nome }}</option>
+      </select>
+    </label>
+
+    <label class="form-field">
+      Nota
+      <select name="nota" [(ngModel)]="nota" required>
+        <option *ngFor="let item of [1, 2, 3, 4, 5]" [value]="item">{{ item }}</option>
+      </select>
+    </label>
+
+    <label class="form-field full">
+      Comentario
+      <textarea name="comentario" [(ngModel)]="comentario" placeholder="Conte como foi sua experiencia"></textarea>
+    </label>
+
+    <div class="actions form-field full">
+      <button class="btn btn-primary" type="submit" [disabled]="carregando">{{ carregando ? 'Enviando...' : 'Enviar avaliacao' }}</button>
+      <a class="btn btn-muted" routerLink="/servicos">Voltar aos servicos</a>
+    </div>
+  </form>
+</section>

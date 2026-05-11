@@ -1,0 +1,84 @@
+.admin-layout {
+  background: #f6f8fb;
+  display: grid;
+  grid-template-columns: 264px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--azul-escuro);
+  color: var(--branco);
+  padding: 1.25rem;
+}
+
+.admin-brand {
+  color: var(--branco);
+  display: inline-flex;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+.sidebar nav {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sidebar a {
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 700;
+  padding: 0.8rem 0.95rem;
+  text-decoration: none;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--branco);
+}
+
+.main-content {
+  min-width: 0;
+}
+
+.admin-header {
+  align-items: center;
+  background: var(--branco);
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 0 1.5rem;
+}
+
+.admin-header span {
+  color: var(--azul-escuro);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.logout {
+  background: var(--teal);
+  border: 0;
+  border-radius: 8px;
+  color: var(--branco);
+  cursor: pointer;
+  font-weight: 800;
+  padding: 0.7rem 1rem;
+}
+
+.admin-main {
+  padding: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar nav {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+}

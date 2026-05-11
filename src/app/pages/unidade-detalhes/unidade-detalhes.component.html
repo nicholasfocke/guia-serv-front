@@ -1,0 +1,51 @@
+<section class="page">
+  <a class="back-link" routerLink="/unidades">Voltar para unidades</a>
+
+  <p class="muted" *ngIf="carregando">Carregando unidade...</p>
+  <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+  <article class="details-grid" *ngIf="unidade">
+    <div>
+      <p class="eyebrow">Unidade de atendimento</p>
+      <h1>{{ unidade.nome }}</h1>
+      <p class="lead">{{ unidade.endereco }}</p>
+
+      <div class="surface section-block">
+        <h2>Servicos atendidos</h2>
+        <div class="clean-list" *ngIf="vinculos.length; else semServicos">
+          <a *ngFor="let vinculo of vinculos" [routerLink]="['/servicos', vinculo.servico?.id || vinculo.servicoId]">
+            <strong>{{ vinculo.servico?.nome || 'Servico vinculado' }}</strong>
+            <span>{{ vinculo.observacoes || vinculo.servico?.descricao || 'Consulte os detalhes do servico.' }}</span>
+          </a>
+        </div>
+        <ng-template #semServicos>
+          <p class="muted">Nenhum servico vinculado a esta unidade.</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <aside class="side-panel">
+      <div class="surface">
+        <h2>Contato</h2>
+        <p><strong>Endereco:</strong> {{ unidade.endereco }}</p>
+        <p *ngIf="unidade.telefone"><strong>Telefone:</strong> {{ unidade.telefone }}</p>
+        <p *ngIf="unidade.email"><strong>Email:</strong> {{ unidade.email }}</p>
+        <p *ngIf="unidade.bairro || unidade.cidade">{{ unidade.bairro }} {{ unidade.cidade }} {{ unidade.estado }}</p>
+      </div>
+
+      <div class="surface section-block">
+        <h2>Horarios</h2>
+        <div class="schedule" *ngIf="horarios.length; else semHorarios">
+          <div *ngFor="let horario of horarios">
+            <strong>{{ horario.diaSemana }}</strong>
+            <span *ngIf="!horario.fechado">{{ horario.horarioAbertura }} as {{ horario.horarioFechamento }}</span>
+            <span *ngIf="horario.fechado">Fechado</span>
+          </div>
+        </div>
+        <ng-template #semHorarios>
+          <p class="muted">Horarios nao informados.</p>
+        </ng-template>
+      </div>
+    </aside>
+  </article>
+</section>

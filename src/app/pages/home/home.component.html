@@ -1,0 +1,77 @@
+<section class="hero">
+  <div class="page hero-grid">
+    <div>
+      <p class="eyebrow">Guia de servicos publicos</p>
+      <h1>Encontre servicos, documentos e unidades de atendimento em um so lugar.</h1>
+      <p class="lead">Consulte orientacoes oficiais, veja onde ser atendido e avalie a experiencia dos servicos municipais.</p>
+      <div class="actions">
+        <a class="btn btn-primary" routerLink="/servicos">Buscar servicos</a>
+        <a class="btn btn-muted" routerLink="/unidades">Ver unidades</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <span>{{ servicos.length }}</span>
+      <strong>servicos em destaque</strong>
+      <p>Dados carregados diretamente da API do GuiaServ.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Categorias</p>
+      <h2>Explore por area</h2>
+    </div>
+    <a class="btn btn-muted" routerLink="/servicos">Ver todos</a>
+  </div>
+  <div class="grid" *ngIf="categorias.length; else semCategorias">
+    <article class="card category-card" *ngFor="let categoria of categorias">
+      <h3>{{ categoria.nome }}</h3>
+      <p>{{ categoria.descricao || 'Servicos relacionados a esta categoria.' }}</p>
+    </article>
+  </div>
+  <ng-template #semCategorias>
+    <div class="empty-state">Nenhuma categoria publicada no momento.</div>
+  </ng-template>
+</section>
+
+<section class="page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Servicos</p>
+      <h2>Mais procurados</h2>
+    </div>
+  </div>
+  <div class="grid" *ngIf="servicos.length; else semServicos">
+    <article class="card service-card" *ngFor="let servico of servicos">
+      <span>{{ servico.categoria?.nome || 'Servico publico' }}</span>
+      <h3>{{ servico.nome }}</h3>
+      <p>{{ servico.descricao }}</p>
+      <a [routerLink]="['/servicos', servico.id]">Detalhes</a>
+    </article>
+  </div>
+  <ng-template #semServicos>
+    <div class="empty-state">Nenhum servico publicado no momento.</div>
+  </ng-template>
+</section>
+
+<section class="page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Atendimento</p>
+      <h2>Unidades disponiveis</h2>
+    </div>
+    <a class="btn btn-muted" routerLink="/unidades">Ver unidades</a>
+  </div>
+  <div class="grid" *ngIf="unidades.length; else semUnidades">
+    <article class="card" *ngFor="let unidade of unidades">
+      <h3>{{ unidade.nome }}</h3>
+      <p>{{ unidade.endereco }}</p>
+      <a [routerLink]="['/unidades', unidade.id]">Como chegar</a>
+    </article>
+  </div>
+  <ng-template #semUnidades>
+    <div class="empty-state">Nenhuma unidade publicada no momento.</div>
+  </ng-template>
+</section>

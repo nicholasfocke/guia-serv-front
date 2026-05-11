@@ -1,0 +1,30 @@
+.auth-page {
+  display: grid;
+  min-height: calc(100vh - 144px);
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  box-shadow: var(--sombra);
+  display: grid;
+  gap: 1rem;
+  max-width: 500px;
+  padding: 2rem;
+  width: 100%;
+}
+
+.auth-card h1 {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.auth-card a {
+  color: var(--teal);
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}

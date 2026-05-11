@@ -1,0 +1,32 @@
+<section class="page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Rede de atendimento</p>
+      <h1>Unidades</h1>
+      <p class="lead">Veja enderecos, contatos e detalhes das unidades de atendimento.</p>
+    </div>
+  </div>
+
+  <div class="surface search-bar">
+    <label class="form-field">
+      Buscar unidade
+      <input type="search" [(ngModel)]="filtro" placeholder="Nome, endereco ou bairro">
+    </label>
+  </div>
+
+  <p class="muted" *ngIf="carregando">Carregando unidades...</p>
+  <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+  <div class="grid unit-grid" *ngIf="!carregando && unidadesFiltradas.length">
+    <article class="card unit-card" *ngFor="let unidade of unidadesFiltradas">
+      <h2>{{ unidade.nome }}</h2>
+      <p>{{ unidade.endereco }}</p>
+      <span *ngIf="unidade.telefone">{{ unidade.telefone }}</span>
+      <a class="btn btn-muted" [routerLink]="['/unidades', unidade.id]">Detalhes</a>
+    </article>
+  </div>
+
+  <div class="empty-state" *ngIf="!carregando && !erro && !unidadesFiltradas.length">
+    Nenhuma unidade encontrada.
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<section class="page">
+  <a class="back-link" routerLink="/servicos">Voltar para servicos</a>
+
+  <p class="muted" *ngIf="carregando">Carregando servico...</p>
+  <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+  <article class="details-grid" *ngIf="servico">
+    <div>
+      <p class="eyebrow">{{ servico.categoria?.nome || 'Servico publico' }}</p>
+      <h1>{{ servico.nome }}</h1>
+      <p class="lead">{{ servico.descricao }}</p>
+
+      <div class="surface section-block" *ngIf="servico.orientacoes || servico.prazoEstimado">
+        <h2>Orientacoes</h2>
+        <p *ngIf="servico.orientacoes">{{ servico.orientacoes }}</p>
+        <p *ngIf="servico.prazoEstimado"><strong>Prazo estimado:</strong> {{ servico.prazoEstimado }}</p>
+      </div>
+
+      <div class="surface section-block">
+        <h2>Documentos</h2>
+        <ul class="clean-list" *ngIf="servico.documentos?.length; else semDocumentos">
+          <li *ngFor="let documento of servico.documentos">
+            <strong>{{ documento.nome }}</strong>
+            <span>{{ documento.descricao || 'Documento solicitado para atendimento.' }}</span>
+          </li>
+        </ul>
+        <ng-template #semDocumentos>
+          <p class="muted">Nenhum documento informado para este servico.</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <aside class="side-panel">
+      <div class="surface">
+        <h2>Atendimento</h2>
+        <div *ngIf="servico.unidades?.length; else semUnidades">
+          <a class="unit-link" *ngFor="let unidade of servico.unidades" [routerLink]="['/unidades', unidade.id]">
+            <strong>{{ unidade.nome }}</strong>
+            <span>{{ unidade.endereco }}</span>
+          </a>
+        </div>
+        <ng-template #semUnidades>
+          <p class="muted">Nenhuma unidade vinculada.</p>
+        </ng-template>
+      </div>
+
+      <a class="btn btn-teal full-button" [routerLink]="['/avaliacao']" [queryParams]="{ servicoId: servico.id }">Avaliar servico</a>
+    </aside>
+  </article>
+
+  <section class="surface section-block" *ngIf="avaliacoes.length">
+    <h2>Avaliacoes recentes</h2>
+    <div class="review" *ngFor="let avaliacao of avaliacoes">
+      <strong>{{ avaliacao.nota }}/5</strong>
+      <p>{{ avaliacao.comentario || 'Sem comentario.' }}</p>
+    </div>
+  </section>
+</section>

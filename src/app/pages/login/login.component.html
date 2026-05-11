@@ -1,0 +1,23 @@
+<section class="auth-page">
+  <form class="auth-card" (ngSubmit)="onSubmit()">
+    <p class="eyebrow">Acesso</p>
+    <h1>Entrar no GuiaServ</h1>
+    <p class="lead">Use sua conta para avaliar servicos e acessar a area administrativa quando autorizado.</p>
+
+    <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+    <label class="form-field">
+      Email
+      <input type="email" name="email" [(ngModel)]="email" required autocomplete="email">
+    </label>
+    <label class="form-field">
+      Senha
+      <input type="password" name="senha" [(ngModel)]="senha" required autocomplete="current-password">
+    </label>
+
+    <button class="btn btn-primary" type="submit" [disabled]="carregando">
+      {{ carregando ? 'Entrando...' : 'Entrar' }}
+    </button>
+    <a routerLink="/cadastro">Criar conta</a>
+  </form>
+</section>

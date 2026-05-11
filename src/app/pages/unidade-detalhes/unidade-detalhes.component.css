@@ -1,0 +1,49 @@
+.back-link {
+  color: var(--teal);
+  display: inline-block;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.details-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr) 340px;
+}
+
+.section-block {
+  margin-top: 1.25rem;
+}
+
+.clean-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.clean-list a,
+.schedule div {
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto);
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem;
+  text-decoration: none;
+}
+
+.clean-list span,
+.schedule span {
+  color: var(--texto-suave);
+}
+
+.schedule {
+  display: grid;
+  gap: 0.7rem;
+}
+
+@media (max-width: 900px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

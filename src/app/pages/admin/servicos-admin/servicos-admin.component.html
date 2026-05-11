@@ -1,0 +1,72 @@
+<section class="page admin-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">CRUD</p>
+      <h1>Servicos</h1>
+    </div>
+    <button class="btn btn-primary" type="button" (click)="novo()">Novo servico</button>
+  </div>
+
+  <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+  <div class="surface" style="margin-bottom: 1rem;">
+    <label class="form-field">
+      Pesquisar
+      <input type="search" [(ngModel)]="filtro" placeholder="Nome ou descricao">
+    </label>
+  </div>
+
+  <form class="surface form-grid" *ngIf="exibirFormulario" (ngSubmit)="salvar()" style="margin-bottom: 1rem;">
+    <label class="form-field">
+      Nome
+      <input name="nome" [(ngModel)]="form.nome" required>
+    </label>
+    <label class="form-field">
+      Categoria
+      <select name="categoriaId" [(ngModel)]="categoriaId" required>
+        <option value="">Selecione</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</option>
+      </select>
+    </label>
+    <label class="form-field full">
+      Descricao
+      <textarea name="descricao" [(ngModel)]="form.descricao" required></textarea>
+    </label>
+    <label class="form-field">
+      Prazo estimado
+      <input name="prazoEstimado" [(ngModel)]="form.prazoEstimado">
+    </label>
+    <label class="form-field">
+      Ativo
+      <select name="ativo" [(ngModel)]="form.ativo">
+        <option [ngValue]="true">Sim</option>
+        <option [ngValue]="false">Nao</option>
+      </select>
+    </label>
+    <label class="form-field full">
+      Orientacoes
+      <textarea name="orientacoes" [(ngModel)]="form.orientacoes"></textarea>
+    </label>
+    <div class="actions form-field full">
+      <button class="btn btn-teal" type="submit">Salvar</button>
+      <button class="btn btn-muted" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+
+  <div class="surface table-wrap">
+    <table>
+      <thead><tr><th>Servico</th><th>Categoria</th><th>Status</th><th>Acoes</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let servico of servicosFiltrados">
+          <td><strong>{{ servico.nome }}</strong><br><span class="muted">{{ servico.descricao }}</span></td>
+          <td>{{ servico.categoria?.nome || '-' }}</td>
+          <td>{{ servico.ativo === false ? 'Inativo' : 'Ativo' }}</td>
+          <td class="actions">
+            <button class="btn btn-muted" type="button" (click)="editar(servico)">Editar</button>
+            <button class="btn btn-danger" type="button" (click)="excluir(servico)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<section class="page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Catalogo</p>
+      <h1>Servicos publicos</h1>
+      <p class="lead">Pesquise pelo servico e consulte documentos, orientacoes e unidades de atendimento.</p>
+    </div>
+  </div>
+
+  <div class="surface filters">
+    <label class="form-field">
+      Buscar
+      <input type="search" [(ngModel)]="filtro" placeholder="Digite o nome do servico">
+    </label>
+    <label class="form-field">
+      Categoria
+      <select [(ngModel)]="categoriaId">
+        <option value="">Todas</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</option>
+      </select>
+    </label>
+  </div>
+
+  <p class="muted" *ngIf="carregando">Carregando servicos...</p>
+  <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+  <div class="grid service-grid" *ngIf="!carregando && servicosFiltrados.length">
+    <article class="card service-card" *ngFor="let servico of servicosFiltrados">
+      <span>{{ servico.categoria?.nome || 'Servico publico' }}</span>
+      <h2>{{ servico.nome }}</h2>
+      <p>{{ servico.descricao }}</p>
+      <a class="btn btn-muted" [routerLink]="['/servicos', servico.id]">Ver detalhes</a>
+    </article>
+  </div>
+
+  <div class="empty-state" *ngIf="!carregando && !erro && !servicosFiltrados.length">
+    Nenhum servico encontrado.
+  </div>
+</section>

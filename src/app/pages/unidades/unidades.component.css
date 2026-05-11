@@ -1,0 +1,22 @@
+.search-bar {
+  margin-bottom: 1.5rem;
+}
+
+.unit-grid {
+  margin-top: 1.5rem;
+}
+
+.unit-card {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.unit-card h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.unit-card p,
+.unit-card span {
+  color: var(--texto-suave);
+}

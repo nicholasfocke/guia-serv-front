@@ -1,0 +1,23 @@
+<div class="admin-layout">
+  <aside class="sidebar">
+    <a class="admin-brand" routerLink="/admin">GuiaServ</a>
+    <nav>
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+      <a routerLink="/admin/categorias" routerLinkActive="active">Categorias</a>
+      <a routerLink="/admin/servicos" routerLinkActive="active">Servicos</a>
+      <a routerLink="/admin/unidades" routerLinkActive="active">Unidades</a>
+      <a routerLink="/admin/documentos" routerLinkActive="active">Documentos</a>
+      <a routerLink="/admin/vinculos" routerLinkActive="active">Vinculos</a>
+      <a routerLink="/admin/horarios" routerLinkActive="active">Horarios</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+    <header class="admin-header">
+      <span>Administracao</span>
+      <button class="logout" type="button" (click)="sair()">Sair</button>
+    </header>
+    <main class="admin-main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

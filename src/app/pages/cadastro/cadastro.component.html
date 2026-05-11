@@ -1,0 +1,27 @@
+<section class="auth-page">
+  <form class="auth-card" (ngSubmit)="onSubmit()">
+    <p class="eyebrow">Cadastro</p>
+    <h1>Criar conta</h1>
+    <p class="lead">Cadastre-se para avaliar servicos publicos e acompanhar sua participacao.</p>
+
+    <div class="empty-state" *ngIf="erro">{{ erro }}</div>
+
+    <label class="form-field">
+      Nome
+      <input type="text" name="nome" [(ngModel)]="nome" required autocomplete="name">
+    </label>
+    <label class="form-field">
+      Email
+      <input type="email" name="email" [(ngModel)]="email" required autocomplete="email">
+    </label>
+    <label class="form-field">
+      Senha
+      <input type="password" name="senha" [(ngModel)]="senha" required autocomplete="new-password" minlength="6">
+    </label>
+
+    <button class="btn btn-primary" type="submit" [disabled]="carregando">
+      {{ carregando ? 'Criando...' : 'Criar conta' }}
+    </button>
+    <a routerLink="/login">Ja tenho conta</a>
+  </form>
+</section>

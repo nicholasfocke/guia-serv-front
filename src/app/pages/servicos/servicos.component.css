@@ -1,0 +1,37 @@
+.filters {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 280px;
+  margin-bottom: 1.5rem;
+}
+
+.service-grid {
+  margin-top: 1.5rem;
+}
+
+.service-card {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.service-card span {
+  color: var(--teal);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.service-card h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.service-card p {
+  color: var(--texto-suave);
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
