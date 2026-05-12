@@ -4,8 +4,10 @@
     <div class="nav-links">
       <a routerLink="/servicos" routerLinkActive="active">Servicos</a>
       <a routerLink="/unidades" routerLinkActive="active">Unidades</a>
+      <a routerLink="/" fragment="categorias">Categorias</a>
       <a routerLink="/avaliacao" routerLinkActive="active" *ngIf="authService.isAuthenticated()">Avaliar</a>
       <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.isAdmin()">Admin</a>
+      <a class="nav-soft" routerLink="/cadastro" *ngIf="!authService.isAuthenticated()">Criar conta</a>
       <a class="nav-cta" routerLink="/login" *ngIf="!authService.isAuthenticated()">Entrar</a>
     </div>
   </nav>
@@ -16,6 +18,6 @@
 </main>
 
 <footer class="site-footer">
-  <span>GuiaServ Publico</span>
+  <span>GuiaServ <strong>Publico</strong></span>
   <span>Informacao de servicos para o cidadao</span>
 </footer>

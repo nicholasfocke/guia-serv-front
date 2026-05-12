@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--borda);
   backdrop-filter: blur(16px);
 }
@@ -17,14 +17,14 @@
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1180px;
-  min-height: 72px;
+  max-width: 1120px;
+  min-height: 64px;
   padding: 0 1.5rem;
 }
 
 .brand {
   color: var(--azul-escuro);
-  font-size: 1.25rem;
+  font-size: 1.12rem;
   font-weight: 800;
   text-decoration: none;
 }
@@ -42,16 +42,28 @@
 }
 
 .nav-links a {
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--texto-suave);
-  font-weight: 700;
-  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 750;
+  padding: 0.58rem 0.8rem;
   text-decoration: none;
 }
 
 .nav-links a.active,
 .nav-links a:hover {
   background: var(--cinza-claro);
+  color: var(--azul-escuro);
+}
+
+.nav-links .nav-cta,
+.nav-links .nav-soft {
+  min-width: 96px;
+  text-align: center;
+}
+
+.nav-links .nav-soft {
+  border: 1px solid var(--borda);
   color: var(--azul-escuro);
 }
 
@@ -70,8 +82,12 @@
   color: var(--branco);
   display: flex;
   justify-content: space-between;
-  min-height: 72px;
+  min-height: 64px;
   padding: 0 1.5rem;
+}
+
+.site-footer strong {
+  color: var(--teal);
 }
 
 @media (max-width: 720px) {

@@ -1,34 +1,68 @@
 <section class="hero">
   <div class="page hero-grid">
-    <div>
+    <div class="hero-copy">
       <p class="eyebrow">Guia de servicos publicos</p>
-      <h1>Encontre servicos, documentos e unidades de atendimento em um so lugar.</h1>
-      <p class="lead">Consulte orientacoes oficiais, veja onde ser atendido e avalie a experiencia dos servicos municipais.</p>
+      <h1>Encontre servicos, documentos e <span>unidades</span> perto de voce.</h1>
+      <p class="lead">Orientacao clara e atualizada sobre servicos municipais. Saiba o que levar, onde ir e como ser atendido.</p>
       <div class="actions">
-        <a class="btn btn-primary" routerLink="/servicos">Buscar servicos</a>
-        <a class="btn btn-muted" routerLink="/unidades">Ver unidades</a>
+        <a class="btn btn-outline-light" routerLink="/servicos">Buscar servicos</a>
+        <a class="btn btn-ghost-light" routerLink="/unidades">Ver unidades</a>
       </div>
     </div>
+
     <div class="hero-panel">
-      <span>{{ servicos.length }}</span>
-      <strong>servicos em destaque</strong>
-      <p>Dados carregados diretamente da API do GuiaServ.</p>
+      <div class="live-badge">Dados em tempo real</div>
+      <div class="metric-grid">
+        <div>
+          <strong>{{ totalServicos }}</strong>
+          <span>Servicos ativos</span>
+        </div>
+        <div>
+          <strong>{{ totalUnidades }}</strong>
+          <span>Unidades</span>
+        </div>
+        <div>
+          <strong>{{ totalCategorias }}</strong>
+          <span>Categorias</span>
+        </div>
+        <div>
+          <strong>{{ mediaAvaliacoes || '-' }}</strong>
+          <span>Avaliacao media</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="page">
+<section class="search-band">
+  <form class="search-shell" (ngSubmit)="buscar()">
+    <span></span>
+    <input type="search" name="busca" [(ngModel)]="busca" placeholder="Busque por RG, vacinacao, segunda via...">
+    <button type="submit">Buscar</button>
+  </form>
+  <div class="quick-tags">
+    <span>Mais buscados:</span>
+    <a routerLink="/servicos">Emissao de RG</a>
+    <a routerLink="/servicos">Vacinacao</a>
+    <a routerLink="/servicos">Segunda via</a>
+    <a routerLink="/servicos">IPTU</a>
+    <a routerLink="/servicos">Certidao</a>
+  </div>
+</section>
+
+<section class="page compact-section" id="categorias">
   <div class="page-header">
     <div>
       <p class="eyebrow">Categorias</p>
       <h2>Explore por area</h2>
     </div>
-    <a class="btn btn-muted" routerLink="/servicos">Ver todos</a>
+    <a class="section-link" routerLink="/servicos">Ver todos</a>
   </div>
-  <div class="grid" *ngIf="categorias.length; else semCategorias">
+  <div class="grid category-grid" *ngIf="categorias.length; else semCategorias">
     <article class="card category-card" *ngFor="let categoria of categorias">
+      <div class="icon-tile"></div>
       <h3>{{ categoria.nome }}</h3>
-      <p>{{ categoria.descricao || 'Servicos relacionados a esta categoria.' }}</p>
+      <p>{{ categoria.descricao || 'Servicos disponiveis nesta area.' }}</p>
     </article>
   </div>
   <ng-template #semCategorias>
@@ -36,19 +70,20 @@
   </ng-template>
 </section>
 
-<section class="page">
+<section class="page compact-section">
   <div class="page-header">
     <div>
       <p class="eyebrow">Servicos</p>
       <h2>Mais procurados</h2>
     </div>
+    <a class="section-link" routerLink="/servicos">Ver todos</a>
   </div>
-  <div class="grid" *ngIf="servicos.length; else semServicos">
+  <div class="grid service-grid" *ngIf="servicos.length; else semServicos">
     <article class="card service-card" *ngFor="let servico of servicos">
       <span>{{ servico.categoria?.nome || 'Servico publico' }}</span>
       <h3>{{ servico.nome }}</h3>
       <p>{{ servico.descricao }}</p>
-      <a [routerLink]="['/servicos', servico.id]">Detalhes</a>
+      <a [routerLink]="['/servicos', servico.id]">Ver detalhes</a>
     </article>
   </div>
   <ng-template #semServicos>
@@ -56,19 +91,22 @@
   </ng-template>
 </section>
 
-<section class="page">
+<section class="page compact-section">
   <div class="page-header">
     <div>
       <p class="eyebrow">Atendimento</p>
       <h2>Unidades disponiveis</h2>
     </div>
-    <a class="btn btn-muted" routerLink="/unidades">Ver unidades</a>
+    <a class="section-link" routerLink="/unidades">Ver todas</a>
   </div>
-  <div class="grid" *ngIf="unidades.length; else semUnidades">
-    <article class="card" *ngFor="let unidade of unidades">
-      <h3>{{ unidade.nome }}</h3>
-      <p>{{ unidade.endereco }}</p>
-      <a [routerLink]="['/unidades', unidade.id]">Como chegar</a>
+  <div class="unit-list" *ngIf="unidades.length; else semUnidades">
+    <article class="unit-row" *ngFor="let unidade of unidades">
+      <div class="icon-tile"></div>
+      <div>
+        <h3>{{ unidade.nome }}</h3>
+        <p>{{ unidade.endereco }}</p>
+      </div>
+      <a [routerLink]="['/unidades', unidade.id]">Detalhes</a>
     </article>
   </div>
   <ng-template #semUnidades>

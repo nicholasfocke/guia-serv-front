@@ -1,19 +1,22 @@
 .auth-page {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), var(--borda) calc(50% - 1px), var(--borda) 50%, transparent 50%),
+    #eef3f7;
   display: grid;
-  min-height: calc(100vh - 144px);
+  min-height: calc(100vh - 128px);
   place-items: center;
-  padding: 2rem 1rem;
+  padding: 4rem 1rem;
 }
 
 .auth-card {
   background: var(--branco);
   border: 1px solid var(--borda);
-  border-radius: 8px;
-  box-shadow: var(--sombra);
+  border-radius: 16px;
+  box-shadow: 0 28px 70px rgba(16, 40, 59, 0.12);
   display: grid;
   gap: 1rem;
-  max-width: 500px;
-  padding: 2rem;
+  max-width: 430px;
+  padding: 2.3rem;
   width: 100%;
 }
 
@@ -22,8 +25,30 @@
   margin-bottom: 0;
 }
 
-.auth-card a {
+.auth-card .lead {
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.auth-card input {
+  background: #2f302d;
+  border-color: #2f302d;
+  color: var(--branco);
+}
+
+.auth-card input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.terms {
+  color: var(--texto-suave);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.switch-link {
   color: var(--teal);
+  font-size: 0.9rem;
   font-weight: 800;
   text-align: center;
   text-decoration: none;

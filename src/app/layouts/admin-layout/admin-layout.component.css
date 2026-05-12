@@ -1,14 +1,14 @@
 .admin-layout {
-  background: #f6f8fb;
+  background: #f3f7fa;
   display: grid;
-  grid-template-columns: 264px 1fr;
+  grid-template-columns: 260px 1fr;
   min-height: 100vh;
 }
 
 .sidebar {
-  background: var(--azul-escuro);
+  background: #10283b;
   color: var(--branco);
-  padding: 1.25rem;
+  padding: 1.25rem 1rem;
 }
 
 .admin-brand {
@@ -16,7 +16,7 @@
   display: inline-flex;
   font-size: 1.35rem;
   font-weight: 800;
-  margin-bottom: 2rem;
+  margin: 0.35rem 0 2rem 0.6rem;
   text-decoration: none;
 }
 
@@ -26,16 +26,17 @@
 }
 
 .sidebar a {
-  border-radius: 8px;
+  border-radius: 10px;
   color: rgba(255, 255, 255, 0.78);
-  font-weight: 700;
+  font-size: 0.93rem;
+  font-weight: 750;
   padding: 0.8rem 0.95rem;
   text-decoration: none;
 }
 
 .sidebar a.active,
 .sidebar a:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(8, 184, 173, 0.18);
   color: var(--branco);
 }
 
@@ -49,7 +50,7 @@
   border-bottom: 1px solid var(--borda);
   display: flex;
   justify-content: space-between;
-  min-height: 72px;
+  min-height: 64px;
   padding: 0 1.5rem;
 }
 
@@ -62,11 +63,11 @@
 .logout {
   background: var(--teal);
   border: 0;
-  border-radius: 8px;
+  border-radius: 999px;
   color: var(--branco);
   cursor: pointer;
   font-weight: 800;
-  padding: 0.7rem 1rem;
+  padding: 0.68rem 1rem;
 }
 
 .admin-main {

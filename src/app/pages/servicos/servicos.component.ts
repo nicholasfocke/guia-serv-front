@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CategoriaServico } from '../../core/models/categoria-servico.model';
 import { ServicoPublico } from '../../core/models/servico-publico.model';
 import { CategoriaService } from '../../core/services/categoria.service';
@@ -25,10 +25,12 @@ export class ServicosComponent implements OnInit {
 
   constructor(
     private servicoService: ServicoService,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.filtro = this.route.snapshot.queryParamMap.get('q') ?? '';
     this.carregar();
     this.categoriaService.listar().subscribe((categorias) => this.categorias = categorias);
   }

@@ -7,21 +7,23 @@
     <div class="empty-state" *ngIf="erro">{{ erro }}</div>
 
     <label class="form-field">
-      Nome
-      <input type="text" name="nome" [(ngModel)]="nome" required autocomplete="name">
+      Nome completo
+      <input type="text" name="nome" [(ngModel)]="nome" required autocomplete="name" placeholder="Joao da Silva">
     </label>
     <label class="form-field">
-      Email
-      <input type="email" name="email" [(ngModel)]="email" required autocomplete="email">
+      E-mail
+      <input type="email" name="email" [(ngModel)]="email" required autocomplete="email" placeholder="seu@email.com">
     </label>
     <label class="form-field">
       Senha
-      <input type="password" name="senha" [(ngModel)]="senha" required autocomplete="new-password" minlength="6">
+      <input type="password" name="senha" [(ngModel)]="senha" required autocomplete="new-password" minlength="6" placeholder="Min. 8 caracteres">
     </label>
+
+    <p class="terms">Ao criar conta, voce concorda com os Termos de uso e a Politica de privacidade.</p>
 
     <button class="btn btn-primary" type="submit" [disabled]="carregando">
       {{ carregando ? 'Criando...' : 'Criar conta' }}
     </button>
-    <a routerLink="/login">Ja tenho conta</a>
+    <a class="switch-link" routerLink="/login">Ja tenho conta - Entrar</a>
   </form>
 </section>

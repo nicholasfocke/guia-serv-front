@@ -2,22 +2,28 @@
   <form class="auth-card" (ngSubmit)="onSubmit()">
     <p class="eyebrow">Acesso</p>
     <h1>Entrar no GuiaServ</h1>
-    <p class="lead">Use sua conta para avaliar servicos e acessar a area administrativa quando autorizado.</p>
+    <p class="lead">Use sua conta para avaliar servicos e acessar a area administrativa.</p>
 
     <div class="empty-state" *ngIf="erro">{{ erro }}</div>
 
+    <button class="social-button" type="button" disabled>Entrar com Google</button>
+
+    <div class="divider"><span>ou com e-mail</span></div>
+
     <label class="form-field">
-      Email
-      <input type="email" name="email" [(ngModel)]="email" required autocomplete="email">
+      E-mail
+      <input type="email" name="email" [(ngModel)]="email" required autocomplete="email" placeholder="seu@email.com">
     </label>
     <label class="form-field">
       Senha
-      <input type="password" name="senha" [(ngModel)]="senha" required autocomplete="current-password">
+      <input type="password" name="senha" [(ngModel)]="senha" required autocomplete="current-password" placeholder="********">
     </label>
+
+    <a class="forgot-link" routerLink="/login">Esqueci a senha</a>
 
     <button class="btn btn-primary" type="submit" [disabled]="carregando">
       {{ carregando ? 'Entrando...' : 'Entrar' }}
     </button>
-    <a routerLink="/cadastro">Criar conta</a>
+    <a class="switch-link" routerLink="/cadastro">Nao tenho conta - Criar agora</a>
   </form>
 </section>
