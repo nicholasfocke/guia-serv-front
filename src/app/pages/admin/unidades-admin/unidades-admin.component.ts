@@ -19,13 +19,12 @@ import { apiErrorMessage } from '../../../shared/utils/api-response.util';
 
       <form class="surface form-grid" *ngIf="exibirFormulario" (ngSubmit)="salvar()" style="margin-bottom: 1rem;">
         <label class="form-field"><span>Nome</span><input name="nome" [(ngModel)]="form.nome" required></label>
-        <label class="form-field"><span>Telefone</span><input name="telefone" [(ngModel)]="form.telefone"></label>
+        <label class="form-field"><span>Telefone</span><input name="telefone" [(ngModel)]="form.telefone" required></label>
         <label class="form-field full"><span>Endereco</span><input name="endereco" [(ngModel)]="form.endereco" required></label>
-        <label class="form-field"><span>Bairro</span><input name="bairro" [(ngModel)]="form.bairro"></label>
-        <label class="form-field"><span>Cidade</span><input name="cidade" [(ngModel)]="form.cidade"></label>
-        <label class="form-field"><span>Estado</span><input name="estado" [(ngModel)]="form.estado" maxlength="2"></label>
-        <label class="form-field"><span>CEP</span><input name="cep" [(ngModel)]="form.cep"></label>
-        <label class="form-field full"><span>Email</span><input type="email" name="email" [(ngModel)]="form.email"></label>
+        <label class="form-field"><span>Bairro</span><input name="bairro" [(ngModel)]="form.bairro" required></label>
+        <label class="form-field"><span>Cidade</span><input name="cidade" [(ngModel)]="form.cidade" required></label>
+        <label class="form-field"><span>Estado</span><input name="estado" [(ngModel)]="form.estado" maxlength="2" required></label>
+        <label class="form-field"><span>CEP</span><input name="cep" [(ngModel)]="form.cep" required></label>
         <div class="actions form-field full">
           <button class="btn btn-teal" type="submit">Salvar</button>
           <button class="btn btn-muted" type="button" (click)="cancelar()">Cancelar</button>
@@ -63,13 +62,16 @@ export class UnidadesAdminComponent implements OnInit {
 
   carregar(): void {
     this.unidadeService.listar().subscribe({
-      next: (unidades) => this.unidades = unidades,
+      next: (unidades) => {
+        this.unidades = unidades;
+        this.erro = '';
+      },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel carregar unidades.')
     });
   }
 
   novo(): void {
-    this.form = { nome: '', endereco: '', ativo: true };
+    this.form = { nome: '', endereco: '', bairro: '', cidade: '', estado: '', cep: '', telefone: '', ativo: true };
     this.exibirFormulario = true;
   }
 
@@ -79,6 +81,7 @@ export class UnidadesAdminComponent implements OnInit {
   }
 
   salvar(): void {
+    this.erro = '';
     const request = this.form.id ? this.unidadeService.atualizar(this.form.id, this.form) : this.unidadeService.criar(this.form);
     request.subscribe({
       next: () => { this.cancelar(); this.carregar(); },
@@ -89,7 +92,10 @@ export class UnidadesAdminComponent implements OnInit {
   excluir(unidade: UnidadeAtendimento): void {
     if (!unidade.id || !confirm(`Excluir unidade "${unidade.nome}"?`)) { return; }
     this.unidadeService.remover(unidade.id).subscribe({
-      next: () => this.carregar(),
+      next: () => {
+        this.erro = '';
+        this.carregar();
+      },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel excluir a unidade.')
     });
   }

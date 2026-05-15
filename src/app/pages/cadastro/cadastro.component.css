@@ -31,13 +31,13 @@
 }
 
 .auth-card input {
-  background: #2f302d;
-  border-color: #2f302d;
-  color: var(--branco);
+  background: var(--branco);
+  border-color: var(--borda);
+  color: var(--texto);
 }
 
 .auth-card input::placeholder {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--texto-suave);
 }
 
 .terms {

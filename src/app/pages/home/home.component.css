@@ -117,8 +117,7 @@
   padding: 0.45rem;
 }
 
-.search-shell span,
-.icon-tile {
+.search-shell span {
   background: #e4fffd;
   border-radius: 8px;
   height: 36px;
@@ -220,7 +219,8 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.service-card span {
+.service-card span,
+.category-badge {
   background: #e8fffc;
   border-radius: 6px;
   color: #008c84;

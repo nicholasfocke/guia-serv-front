@@ -60,7 +60,7 @@
   </div>
   <div class="grid category-grid" *ngIf="categorias.length; else semCategorias">
     <article class="card category-card" *ngFor="let categoria of categorias">
-      <div class="icon-tile"></div>
+      <span class="category-badge">Categorias</span>
       <h3>{{ categoria.nome }}</h3>
       <p>{{ categoria.descricao || 'Servicos disponiveis nesta area.' }}</p>
     </article>
@@ -101,7 +101,7 @@
   </div>
   <div class="unit-list" *ngIf="unidades.length; else semUnidades">
     <article class="unit-row" *ngFor="let unidade of unidades">
-      <div class="icon-tile"></div>
+      <app-unit-icon></app-unit-icon>
       <div>
         <h3>{{ unidade.nome }}</h3>
         <p>{{ unidade.endereco }}</p>

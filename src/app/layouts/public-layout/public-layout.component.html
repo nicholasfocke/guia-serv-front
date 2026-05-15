@@ -8,7 +8,7 @@
       <a routerLink="/avaliacao" routerLinkActive="active" *ngIf="authService.isAuthenticated()">Avaliar</a>
       <a routerLink="/admin" routerLinkActive="active" *ngIf="authService.isAdmin()">Admin</a>
       <a class="nav-soft" routerLink="/cadastro" *ngIf="!authService.isAuthenticated()">Criar conta</a>
-      <a class="nav-cta" routerLink="/login" *ngIf="!authService.isAuthenticated()">Entrar</a>
+      <a class="nav-cta" routerLink="/login">Entrar</a>
     </div>
   </nav>
 </header>

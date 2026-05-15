@@ -13,9 +13,17 @@
 
     <label class="form-field full">
       Servico
-      <select name="servicoId" [(ngModel)]="servicoId" required>
+      <select name="servicoId" [(ngModel)]="servicoId" (ngModelChange)="carregarUnidades()" required>
         <option value="">Selecione</option>
         <option *ngFor="let servico of servicos" [value]="servico.id">{{ servico.nome }}</option>
+      </select>
+    </label>
+
+    <label class="form-field full">
+      Unidade
+      <select name="unidadeId" [(ngModel)]="unidadeId" required>
+        <option value="">Selecione</option>
+        <option *ngFor="let unidade of unidades" [value]="unidade.id">{{ unidade.nome }}</option>
       </select>
     </label>
 

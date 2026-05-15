@@ -4,7 +4,9 @@ import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Avaliacao } from '../../core/models/avaliacao.model';
 import { ServicoPublico } from '../../core/models/servico-publico.model';
 import { AvaliacaoService } from '../../core/services/avaliacao.service';
+import { DocumentoService } from '../../core/services/documento.service';
 import { ServicoService } from '../../core/services/servico.service';
+import { ServicoUnidadeService } from '../../core/services/servico-unidade.service';
 import { apiErrorMessage } from '../../shared/utils/api-response.util';
 
 @Component({
@@ -23,6 +25,8 @@ export class ServicoDetalhesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private servicoService: ServicoService,
+    private documentoService: DocumentoService,
+    private servicoUnidadeService: ServicoUnidadeService,
     private avaliacaoService: AvaliacaoService
   ) {}
 
@@ -38,6 +42,7 @@ export class ServicoDetalhesComponent implements OnInit {
       next: (servico) => {
         this.servico = servico;
         this.carregando = false;
+        this.carregarRelacionamentos(id);
       },
       error: (error) => {
         this.erro = apiErrorMessage(error, 'Nao foi possivel carregar o servico.');
@@ -46,5 +51,30 @@ export class ServicoDetalhesComponent implements OnInit {
     });
 
     this.avaliacaoService.getByServico(id).subscribe((avaliacoes) => this.avaliacoes = avaliacoes);
+  }
+
+  private carregarRelacionamentos(servicoId: number): void {
+    this.documentoService.listarPorServico(servicoId).subscribe({
+      next: (documentos) => {
+        if (this.servico) {
+          this.servico = { ...this.servico, documentos };
+        }
+      },
+      error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel carregar os documentos do servico.')
+    });
+
+    this.servicoUnidadeService.listarPorServico(servicoId).subscribe({
+      next: (vinculos) => {
+        if (this.servico) {
+          this.servico = {
+            ...this.servico,
+            unidades: vinculos
+              .map((vinculo) => vinculo.unidade)
+              .filter((unidade): unidade is NonNullable<typeof unidade> => Boolean(unidade))
+          };
+        }
+      },
+      error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel carregar as unidades vinculadas.')
+    });
   }
 }

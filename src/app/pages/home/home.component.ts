@@ -10,11 +10,12 @@ import { AvaliacaoService } from '../../core/services/avaliacao.service';
 import { CategoriaService } from '../../core/services/categoria.service';
 import { ServicoService } from '../../core/services/servico.service';
 import { UnidadeService } from '../../core/services/unidade.service';
+import { UnitIconComponent } from '../../shared/components/unit-icon/unit-icon.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, UnitIconComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

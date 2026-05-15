@@ -48,4 +48,13 @@
       </div>
     </aside>
   </article>
+
+  <section class="surface section-block" *ngIf="avaliacoes.length">
+    <h2>Avaliacoes recentes</h2>
+    <div class="review" *ngFor="let avaliacao of avaliacoes">
+      <strong>{{ avaliacao.nota }}/5 - {{ avaliacao.unidade?.nome || unidade?.nome }}</strong>
+      <span class="muted">Servico: {{ avaliacao.servico?.nome || 'Servico nao informado' }}</span>
+      <p>{{ avaliacao.comentario || 'Sem comentario.' }}</p>
+    </div>
+  </section>
 </section>

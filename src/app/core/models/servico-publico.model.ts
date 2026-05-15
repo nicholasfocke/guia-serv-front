@@ -6,6 +6,8 @@ export interface ServicoPublico {
   id?: number;
   nome: string;
   descricao: string;
+  palavrasChave?: string;
+  precisaAgendamento?: boolean;
   categoria?: CategoriaServico;
   categoriaId?: number;
   documentos?: Documento[];

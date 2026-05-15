@@ -25,14 +25,7 @@ import { apiErrorMessage } from '../../../shared/utils/api-response.util';
         </label>
         <label class="form-field full">
           Descricao
-          <textarea name="descricao" [(ngModel)]="form.descricao"></textarea>
-        </label>
-        <label class="form-field">
-          <span>Ativa</span>
-          <select name="ativo" [(ngModel)]="form.ativo">
-            <option [ngValue]="true">Sim</option>
-            <option [ngValue]="false">Nao</option>
-          </select>
+          <textarea name="descricao" [(ngModel)]="form.descricao" required minlength="10"></textarea>
         </label>
         <div class="actions form-field full">
           <button class="btn btn-teal" type="submit">Salvar</button>
@@ -73,7 +66,10 @@ export class CategoriasAdminComponent implements OnInit {
 
   carregar(): void {
     this.categoriaService.listar().subscribe({
-      next: (categorias) => this.categorias = categorias,
+      next: (categorias) => {
+        this.categorias = categorias;
+        this.erro = '';
+      },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel carregar categorias.')
     });
   }
@@ -89,6 +85,7 @@ export class CategoriasAdminComponent implements OnInit {
   }
 
   salvar(): void {
+    this.erro = '';
     const request = this.form.id
       ? this.categoriaService.atualizar(this.form.id, this.form)
       : this.categoriaService.criar(this.form);
@@ -106,7 +103,10 @@ export class CategoriasAdminComponent implements OnInit {
       return;
     }
     this.categoriaService.remover(categoria.id).subscribe({
-      next: () => this.carregar(),
+      next: () => {
+        this.erro = '';
+        this.carregar();
+      },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel excluir a categoria.')
     });
   }

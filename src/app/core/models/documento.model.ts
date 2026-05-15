@@ -7,4 +7,6 @@ export interface Documento {
   obrigatorio?: boolean;
   servico?: ServicoPublico;
   servicoId?: number;
+  servicos?: ServicoPublico[];
+  servicoIds?: number[];
 }

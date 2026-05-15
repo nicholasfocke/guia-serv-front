@@ -52,7 +52,6 @@ import { apiErrorMessage } from '../../../shared/utils/api-response.util';
               <td>{{ vinculo.unidade?.nome || '-' }}</td>
               <td>{{ vinculo.observacoes || '-' }}</td>
               <td class="actions">
-                <button class="btn btn-muted" type="button" (click)="editar(vinculo)">Editar</button>
                 <button class="btn btn-danger" type="button" (click)="excluir(vinculo)">Excluir</button>
               </td>
             </tr>
@@ -86,7 +85,10 @@ export class VinculosAdminComponent implements OnInit {
 
   carregar(): void {
     this.vinculoService.listar().subscribe({
-      next: (vinculos) => this.vinculos = vinculos,
+      next: (vinculos) => {
+        this.vinculos = vinculos;
+        this.erro = '';
+      },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel carregar vinculos.')
     });
   }
@@ -106,26 +108,36 @@ export class VinculosAdminComponent implements OnInit {
   }
 
   salvar(): void {
+    this.erro = '';
     const servicoId = Number(this.servicoId);
     const unidadeId = Number(this.unidadeId);
+
+    if (!servicoId || !unidadeId) {
+      this.erro = 'Selecione um servico e uma unidade.';
+      return;
+    }
+
     const payload: Partial<ServicoUnidade> = {
-      ...this.form,
       servicoId,
       unidadeId,
-      servico: { id: servicoId } as ServicoPublico,
-      unidade: { id: unidadeId } as UnidadeAtendimento
+      observacoes: this.form.observacoes
     };
-    const request = this.form.id ? this.vinculoService.atualizar(this.form.id, payload) : this.vinculoService.criar(payload);
-    request.subscribe({
+    this.vinculoService.criar(payload).subscribe({
       next: () => { this.cancelar(); this.carregar(); },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel salvar o vinculo.')
     });
   }
 
   excluir(vinculo: ServicoUnidade): void {
-    if (!vinculo.id || !confirm('Excluir vinculo?')) { return; }
-    this.vinculoService.remover(vinculo.id).subscribe({
-      next: () => this.carregar(),
+    const servicoId = vinculo.servico?.id ?? vinculo.servicoId;
+    const unidadeId = vinculo.unidade?.id ?? vinculo.unidadeId;
+
+    if (!servicoId || !unidadeId || !confirm('Excluir vinculo?')) { return; }
+    this.vinculoService.desvincular(servicoId, unidadeId).subscribe({
+      next: () => {
+        this.erro = '';
+        this.carregar();
+      },
       error: (error) => this.erro = apiErrorMessage(error, 'Nao foi possivel excluir o vinculo.')
     });
   }

@@ -1,5 +1,6 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -73,7 +74,7 @@
 }
 
 .public-main {
-  min-height: calc(100vh - 144px);
+  flex: 1;
 }
 
 .site-footer {

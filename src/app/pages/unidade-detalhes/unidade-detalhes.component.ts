@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Avaliacao } from '../../core/models/avaliacao.model';
 import { HorarioFuncionamento } from '../../core/models/horario-funcionamento.model';
 import { ServicoUnidade } from '../../core/models/servico-unidade.model';
 import { UnidadeAtendimento } from '../../core/models/unidade-atendimento.model';
+import { AvaliacaoService } from '../../core/services/avaliacao.service';
 import { HorarioService } from '../../core/services/horario.service';
 import { ServicoUnidadeService } from '../../core/services/servico-unidade.service';
 import { UnidadeService } from '../../core/services/unidade.service';
@@ -20,6 +22,7 @@ export class UnidadeDetalhesComponent implements OnInit {
   unidade?: UnidadeAtendimento;
   vinculos: ServicoUnidade[] = [];
   horarios: HorarioFuncionamento[] = [];
+  avaliacoes: Avaliacao[] = [];
   carregando = true;
   erro = '';
 
@@ -27,7 +30,8 @@ export class UnidadeDetalhesComponent implements OnInit {
     private route: ActivatedRoute,
     private unidadeService: UnidadeService,
     private vinculoService: ServicoUnidadeService,
-    private horarioService: HorarioService
+    private horarioService: HorarioService,
+    private avaliacaoService: AvaliacaoService
   ) {}
 
   ngOnInit(): void {
@@ -49,11 +53,10 @@ export class UnidadeDetalhesComponent implements OnInit {
       }
     });
 
-    this.vinculoService.listar().subscribe((vinculos) => {
-      this.vinculos = vinculos.filter((vinculo) => vinculo.unidade?.id === id || vinculo.unidadeId === id);
-    });
+    this.vinculoService.listarPorUnidade(id).subscribe((vinculos) => this.vinculos = vinculos);
     this.horarioService.listar().subscribe((horarios) => {
       this.horarios = horarios.filter((horario) => horario.unidade?.id === id || horario.unidadeId === id);
     });
+    this.avaliacaoService.getByUnidade(id).subscribe((avaliacoes) => this.avaliacoes = avaliacoes);
   }
 }
