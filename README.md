@@ -1,59 +1,82 @@
-# GuiaServFrontend
+<div align="center">
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.25.
+# 🌐 GuiaServ Público — Frontend
 
-## Development server
+**Interface web para a plataforma de orientação em serviços públicos brasileiros**
 
-To start a local development server, run:
+[![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![CSS3](https://img.shields.io/badge/CSS3-Custom-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![RxJS](https://img.shields.io/badge/RxJS-7.x-B7178C?style=for-the-badge&logo=reactivex&logoColor=white)](https://rxjs.dev/)
+[![Node](https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 
-```bash
-ng serve
-```
+[![GitHub repo](https://img.shields.io/badge/GitHub-nicholasfocke%2Fguia--serv--front-181717?style=flat-square&logo=github)](https://github.com/nicholasfocke/guia-serv-front)
+[![API](https://img.shields.io/badge/API-guia--serv--publico-0ea5a0?style=flat-square)](https://github.com/nicholasfocke/guia-serv-publico)
+[![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=flat-square)]()
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+</div>
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📋 Sumário
 
-```bash
-ng generate component component-name
-```
+1. [Sobre o Projeto](#-sobre-o-projeto)
+2. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+3. [Funcionalidades Implementadas](#-funcionalidades-implementadas)
+4. [Arquitetura do Frontend](#-arquitetura-do-frontend)
+5. [Estrutura de Pastas](#-estrutura-de-pastas)
+6. [Integração com a API](#-integração-com-a-api)
+7. [Autenticação JWT no Frontend](#-autenticação-jwt-no-frontend)
+8. [Perfis de Acesso e Rotas Protegidas](#-perfis-de-acesso-e-rotas-protegidas)
+9. [Como Executar o Projeto](#-como-executar-o-projeto)
+10. [Variáveis de Ambiente](#-variáveis-de-ambiente)
+11. [Telas Implementadas](#-telas-implementadas)
+12. [Melhorias Futuras](#-melhorias-futuras)
+13. [Repositório da API](#-repositório-da-api)
+14. [Autor](#-autor)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📖 Sobre o Projeto
 
-## Building
+O **GuiaServ Público — Frontend** é a interface web da plataforma de orientação em serviços públicos brasileiros. Desenvolvido em **Angular 19**, consome diretamente a [API REST GuiaServPublico](https://github.com/nicholasfocke/guia-serv-publico) (Java 21 + Spring Boot 3) e oferece ao cidadão uma experiência clara, responsiva e acessível para encontrar serviços, unidades de atendimento, documentos necessários e avaliações de outros usuários.
 
-To build the project run:
+O projeto segue as melhores práticas do ecossistema Angular moderno: componentes standalone, signals, lazy loading por rota, interceptors HTTP e guards de navegação baseados em perfil de acesso.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🛠️ Tecnologias Utilizadas
 
-## Running unit tests
+| Categoria | Tecnologia | Versão |
+|---|---|---|
+| Framework | Angular | 19 |
+| Linguagem | TypeScript | 5.x |
+| Estilização | CSS3 customizado | — |
+| Reatividade | RxJS | 7.x |
+| HTTP Client | Angular HttpClient | — |
+| Roteamento | Angular Router | — |
+| Autenticação | JWT (via HttpInterceptor) | — |
+| Ambiente | Node.js | 20+ |
+| Package manager | npm | — |
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## ✅ Funcionalidades Implementadas
 
-## Running end-to-end tests
+| Funcionalidade | Perfil | Status |
+|---|---|---|
+| Tela de login com JWT | Público | ✅ Implementado |
+| Tela de cadastro de usuário | Público | ✅ Implementado |
+| Listagem de serviços públicos | Público | ✅ Implementado |
+| Busca e filtro de serviços | Público | ✅ Implementado |
+| Listagem de unidades de atendimento | Público | ✅ Implementado |
+| Visualização de horários e documentos | USER | ✅ Implementado |
+| Avaliação de serviços e unidades | USER | ✅ Implementado |
+| Painel administrativo (CRUD) | ADMIN | ✅ Implementado |
+| Integração completa com a API REST | — | ✅ Funcionando |
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## 🏗️ Arquitetura do Frontend
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+O projeto segue a arquitetura recomendada pelo Angular moderno, organizada em três grandes camadas:
