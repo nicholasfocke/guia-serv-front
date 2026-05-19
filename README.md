@@ -444,7 +444,6 @@ Frontend & Backend Developer · Angular · Java · Spring Boot
 ---
 
 <div align="center">
-
-Feito com ☕ TypeScript e dedicação · © 2024 Nicholas Focke
+· © Nicholas Focke
 
 </div>
